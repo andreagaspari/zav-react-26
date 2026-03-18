@@ -16,6 +16,7 @@
     "react": "^19.2.4",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.4",
+    "react-icons": "^5.6.0",
     "react-router-dom": "^7.13.1"
   },
   "devDependencies": {
@@ -27,6 +28,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "my_lib": "file:./my_lib/",
     "vite": "^6.3.1"
   }
 }
