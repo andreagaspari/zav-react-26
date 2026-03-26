@@ -1,9 +1,11 @@
-import Loading from '../components/Loading'
+import {Container} from 'react-bootstrap'
 import GridAutomobili from '../components/GridAutomobili'
 
 export default function HomePage() {
   return <>
     <h1>Hello World!</h1>
-    <GridAutomobili />
+    <Container>
+      <GridAutomobili />
+    </Container>
   </>
 }

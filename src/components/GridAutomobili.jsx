@@ -1,41 +1,70 @@
 import { useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import CardAutomobile from './CardAutomobile'
+import SelectMarca from './SelectMarca'
+import SelectColore from './SelectColore'
+import SelectAnno from './SelectAnno'
 import Loading from './Loading'
 import { get as getAutomobili } from '../services/automobili'
 
 export default function GridAutomobili() {
-    const [listaAuto, setListaAuto] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [listaAuto, setListaAuto] = useState([]);
 
-    console.log("prima dell'effetto: ", listaAuto);
+    const [filtriAuto, setFiltriAuto] = useState({
+        anno: '',
+        marca: '',
+        colore: ''
+    });
+
+    const handleFiltriAutoChange = (key, value) => {
+        setFiltriAuto((prevFiltriAuto) => { return {
+            ...prevFiltriAuto,
+            [key]: value
+        }});
+    }
 
     useEffect(() => {
         const fetchAuto = async function() {
-            let tempAuto = await getAutomobili();
+            let tempAuto = await getAutomobili(filtriAuto);
             setListaAuto(tempAuto);
             setLoading(false);
-            console.log("Fetch ha tornato i risultati")
         }
-        console.log("Chiamo fetchAuto");
         fetchAuto();
-    }, []);
-
-    console.log("dopo l'effetto: ", listaAuto);
-
+        
+    }, [filtriAuto]);
+    
     if (isLoading) return <Loading/>
 
-    return <Container>
-        <Row xs="1" md="2" xl="4">
+    return <>
+        <Row className="mb-3">
+            <Col>
+                <SelectMarca onChange={(e) => {
+                    handleFiltriAutoChange('marca', e.target.value)
+                }} />
+            </Col>
+            <Col>
+                <SelectColore onChange={(e) => {
+                    handleFiltriAutoChange('colore', e.target.value)
+                }} />
+            </Col>
+            <Col>
+                <SelectAnno onChange={(e) => {
+                    handleFiltriAutoChange('anno', e.target.value)
+                }} />
+            </Col>
+        </Row>
+    
+        <Row xs="1" md="2" xl="4" className="g-3">
             {
                 (listaAuto.length > 0) ?
-                    listaAuto.map((automobile) => {
-                        return <Col key={automobile.id}>
+                listaAuto.map((automobile) => {
+                    return <Col key={automobile.id}>
                             <CardAutomobile automobile={automobile} />
                         </Col>
                     })
-                : <p>Nessuna auto disponibile</p>
+                    : <p>Nessuna auto disponibile</p>
             }
         </Row>
-    </Container>;
+    </>;
 }

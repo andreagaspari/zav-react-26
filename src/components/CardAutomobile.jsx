@@ -7,11 +7,18 @@ export default function CardAutomobile({
 }) {
 
     const [isInWishlist, setInWishlist] = useState(false)
-    console.log("Render CardAutomobile");
 
     return <>
         <Card id={"cardAutoo-" + automobile.id}>
-            <Card.Img variant="top" src="https://placehold.co/600x400" />
+            <Card.Img 
+                variant="top" 
+                style={
+                    {
+                        aspectRatio: "16/9",
+                        objectFit: "cover"
+                    }
+                }
+                src={automobile.immagine ?? "https://placehold.co/600x400"} />
             <Card.Body>
                 <Card.Title>
                     <Stack direction="horizontal">
