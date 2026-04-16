@@ -31,7 +31,6 @@ export default function GridAutomobili() {
             setLoading(false);
         }
         fetchAuto();
-        
     }, [filtriAuto]);
     
     if (isLoading) return <Loading/>
