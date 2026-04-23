@@ -17,12 +17,11 @@ export function AuthProvider({children}) {
     async function login(credentials) {
         const tempUser = await authService.login(credentials);
         if (tempUser) 
-            setUser(tempUser);
+            setUser(user);
         return tempUser;
     }
 
     function logout() {
-        authService.logout();
         setUser(null)
     }
 

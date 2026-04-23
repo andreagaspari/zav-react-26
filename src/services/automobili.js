@@ -31,3 +31,21 @@ export async function get(filtri) {
 
     return await listaAuto.json();
 }
+
+export async function post(automobile) {
+    let urlAuto = "https://my-json-server.typicode.com/andreagaspari/zav-react-25/automobili"
+
+    const resp = await fetch(urlAuto, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(automobile)
+    });
+
+    if (!resp.status) {
+        throw new Error("Errore del server");
+    }
+
+    return await resp.json();
+}

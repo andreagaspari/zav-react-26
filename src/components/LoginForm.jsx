@@ -3,7 +3,7 @@ import { Alert, Card, Form, Button, InputGroup } from 'react-bootstrap'
 import { FaEyeSlash, FaEye } from 'react-icons/fa6';
 import Loading from './Loading';
 import { AuthContext } from '../contexts/AuthContext.jsx';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
@@ -11,6 +11,7 @@ export default function LoginForm() {
     const [isError, setIsError] = useState(false)
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSubmit = async function(e) {
         e.preventDefault();
@@ -21,7 +22,8 @@ export default function LoginForm() {
         setIsError(false)
         const tempUser = await login(formDataObj);
         if (tempUser) {
-            navigate("/")
+            const from = location.state?.from?.pathname || '/';
+            navigate(from)
         } else {
             setIsLoading(false);
             setIsError(true);
