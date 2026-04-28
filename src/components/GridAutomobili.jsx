@@ -33,9 +33,11 @@ export default function GridAutomobili() {
         fetchAuto();
     }, [filtriAuto]);
     
-    if (isLoading) return <Loading/>
+    if (isLoading) return <div className="h-100 w-100 d-flex justify-content-center align-items-center">
+        <Loading />
+    </div>
 
-    return <>
+    return <div className="m-3">
         <Row className="mb-3">
             <Col>
                 <SelectMarca onChange={(e) => {
@@ -65,5 +67,5 @@ export default function GridAutomobili() {
                     : <p>Nessuna auto disponibile</p>
             }
         </Row>
-    </>;
+    </div>;
 }

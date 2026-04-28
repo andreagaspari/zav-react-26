@@ -49,3 +49,19 @@ export async function post(automobile) {
 
     return await resp.json();
 }
+
+export async function getById(id = null) {
+    if (!id) {
+        return {};
+    }
+    
+    let urlAuto = `https://my-json-server.typicode.com/andreagaspari/zav-react-25/automobili/${id}`;
+
+    const resp = await fetch(urlAuto);
+
+    if (!resp.status) {
+        throw new Error("Errore del server");
+    }
+
+    return await resp.json();
+}

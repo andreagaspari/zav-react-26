@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router'
 import { Card, Button, Stack } from 'react-bootstrap'
 import { FaRegHeart, FaHeart } from 'react-icons/fa6'
 
@@ -7,6 +9,7 @@ export default function CardAutomobile({
 }) {
 
     const [isInWishlist, setInWishlist] = useState(false)
+    const navigate = useNavigate();
 
     return <>
         <Card id={"cardAutoo-" + automobile.id}>
@@ -18,13 +21,17 @@ export default function CardAutomobile({
                         objectFit: "cover"
                     }
                 }
-                src={automobile.immagine ?? "https://placehold.co/600x400"} />
+                src={automobile.immagine ?? "https://placehold.co/600x400"}
+                onClick={() => {
+                    navigate(`/automobili/${automobile.id}`)
+                }}
+            />
             <Card.Body>
                 <Card.Title>
                     <Stack direction="horizontal">
-                        <span className="me-auto">
+                        <Link className="me-auto" to={`/automobili/${automobile.id}`}>
                             { automobile.marca + " " + automobile.modello }
-                        </span>
+                        </Link>
                         <Button onClick={() => {
                             setInWishlist(!isInWishlist)
                         }}>

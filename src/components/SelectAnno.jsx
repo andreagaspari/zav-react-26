@@ -6,8 +6,8 @@ export default function SelectAnno ({onChange = () => {}}) {
     return <Form.Select aria-label="Seleziona anno" onChange={onChange}>
         <option value="">Tutti</option>
         {
-            listaAnni.map((anno) => {
-                return <option value={anno}>{anno}</option>
+            listaAnni.map((anno, idx) => {
+                return <option value={anno} key={idx}>{anno}</option>
             })
         }
     </Form.Select>
