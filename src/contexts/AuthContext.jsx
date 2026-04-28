@@ -17,7 +17,7 @@ export function AuthProvider({children}) {
     async function login(credentials) {
         const tempUser = await authService.login(credentials);
         if (tempUser) 
-            setUser(user);
+            setUser(tempUser);
         return tempUser;
     }
 
